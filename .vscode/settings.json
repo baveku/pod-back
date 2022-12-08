@@ -3,10 +3,18 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "json.schemas": [
     {
-      "fileMatch": [
-        "/*electron-builder.json5"
-      ],
+      "fileMatch": ["/*electron-builder.json5"],
       "url": "https://json.schemastore.org/electron-builder"
     }
-  ]
+  ],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "node_modules": true,
+    "dist-electron": true
+  }
 }

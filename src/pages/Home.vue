@@ -48,7 +48,6 @@ watch(xmlFile, async (newValue, oldValue) => {
 })
 
 const treeData = ref('')
-const PSD = require('psd.js')
 function _onExcute() {
 	const orders: OrderInfo[] = sheetValues.value
 	exportPng(orders[0])
@@ -59,11 +58,6 @@ const exportPng = async (order: OrderInfo) => {
 	console.log(files)
 	console.log(order.sku)
 	const file = files[0]
-	const psd = PSD.fromFile(file.path)
-	psd.parse()
-	const layer = psd.active
-	console.log(psd.tree().export())
-	await psd.image.saveAsPng(`./output/${order.id}.png`)
 }
 
 const _onRunPython = () => {
