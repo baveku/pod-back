@@ -16,6 +16,7 @@
   "dependencies": {
     "exceljs": "^4.3.0",
     "psd.js": "^3.6.5",
+    "python-shell": "^3.0.1",
     "vue-router": "4",
     "vuetify": "3.0.4"
   },
@@ -24,6 +25,7 @@
     "electron": "^22.0.0",
     "electron-builder": "^23.3.3",
     "typescript": "^4.8.4",
+    "unplugin-vue-router": "^0.2.3",
     "vite": "^3.2.2",
     "vite-plugin-electron": "^0.10.4",
     "vite-plugin-electron-renderer": "^0.11.3",

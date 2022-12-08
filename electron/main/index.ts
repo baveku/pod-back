@@ -10,9 +10,11 @@
 //
 process.env.DIST_ELECTRON = join(__dirname, '..')
 process.env.DIST = join(process.env.DIST_ELECTRON, '../dist')
-process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST_ELECTRON, '../public')
+process.env.PUBLIC = app.isPackaged
+  ? process.env.DIST
+  : join(process.env.DIST_ELECTRON, '../public')
 
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 
@@ -52,7 +54,8 @@ async function createWindow() {
     },
   })
 
-  if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
+  if (process.env.VITE_DEV_SERVER_URL) {
+    // electron-vite-vue#298
     win.loadURL(url)
     // Open devTool if the app is not packaged
     win.webContents.openDevTools()

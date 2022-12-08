@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PyScript from '@/utilities/python'
 import Excel from 'exceljs'
 import fs from 'fs'
 import { computed, ref, watch } from 'vue'
@@ -65,6 +66,10 @@ const exportPng = async (order: OrderInfo) => {
 	await psd.image.saveAsPng(`./output/${order.id}.png`)
 }
 
+const _onRunPython = () => {
+	PyScript.changeTextPyScript('change_text')
+}
+
 </script>
 
 <template>
@@ -109,6 +114,9 @@ const exportPng = async (order: OrderInfo) => {
 	<div id="#psd-output"></div>
 	<v-btn v-on:click="_onExcute">
 		Excute
+	</v-btn>
+	<v-btn @click="_onRunPython">
+		Run Python
 	</v-btn>
 </template>
 

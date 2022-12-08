@@ -1,5 +1,6 @@
 import vue from '@vitejs/plugin-vue'
 import { rmSync } from 'fs'
+import VueRouter from 'unplugin-vue-router/vite'
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 import electron from 'vite-plugin-electron'
 import renderer from 'vite-plugin-electron-renderer'
@@ -36,7 +37,8 @@ function loadEnvPlugin(): Plugin {
 export default defineConfig({
   plugins: [
     vue(),
-    tsconfigPaths(),
+    tsconfigPaths({ loose: true }),
+    VueRouter({}),
     electron([
       {
         // Main-Process entry file of the Electron App.
