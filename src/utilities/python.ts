@@ -9,7 +9,7 @@ const getPythonFile = (script: PythonScript) => {
   }
 }
 
-const changeTextPyScript = (type: PythonScript, args: string[] = []) => {
+const changeTextPyScript = (type: PythonScript, args: any[] = []) => {
   const path = DIR_SCRIPT_PATH + '/' + getPythonFile(type)
   PythonShell.run(path, { args }, (err, result) => {
     if (err) console.log(err)

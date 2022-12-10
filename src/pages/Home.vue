@@ -61,7 +61,19 @@ const exportPng = async (order: OrderInfo) => {
 }
 
 const _onRunPython = () => {
-	PyScript.changeTextPyScript('change_text')
+	const orders = sheetValues.value
+	let files: { [key: string]: { ids: string[], texts: string[] } } = {}
+	orders.forEach(val => {
+		const current = files[val.sku] ?? { ids: [], texts: [] }
+		files[val.sku] = {
+			ids: [...current.ids, val.id],
+			texts: [...current.texts, val.customName]
+		}
+	})
+	Object.keys(files).forEach(id => {
+		const file = templateFiles.value.find(val => val.name === `${id}.psd`)
+		PyScript.changeTextPyScript('change_text', [file.path, files[id].ids, files[id].texts])
+	})
 }
 
 </script>
@@ -69,8 +81,8 @@ const _onRunPython = () => {
 <template>
 	<div class="container">
 		<div class="template">
-			<v-file-input label="Template folder" webkitdirectory v-model="templateFiles"></v-file-input>
-			<v-table fixed-header height="300px">
+			<v-file-input label="Template folder" webkitdirectory v-model="templateFiles" accept=".xlsx"></v-file-input>
+			<v-table fixed-header>
 				<tbody>
 					<tr v-for="item in templateFiles">
 						<td>{{ item.name }}</td>
@@ -81,7 +93,7 @@ const _onRunPython = () => {
 		<div class="order">
 			<v-file-input label="Order files" v-model="selectedXmlFile"></v-file-input>
 			<p>{{ xlsxMessage }}</p>
-			<v-table fixed-header height="300px">
+			<v-table fixed-header>
 				<thead>
 					<tr>
 						<th class="text-center">
@@ -118,10 +130,12 @@ const _onRunPython = () => {
 .container {
 	display: flex;
 	flex-direction: row;
+	height: 600px;
 }
 
 .template {
 	width: 400px;
+	flex: 1
 }
 
 .order {
