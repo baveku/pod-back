@@ -4,7 +4,6 @@ import VueRouter from 'unplugin-vue-router/vite'
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 import electron from 'vite-plugin-electron'
 import renderer from 'vite-plugin-electron-renderer'
-import tsconfigPaths from 'vite-tsconfig-paths'
 import pkg from './package.json'
 rmSync('dist-electron', { recursive: true, force: true })
 const sourcemap = !!process.env.VSCODE_DEBUG
@@ -37,7 +36,6 @@ function loadEnvPlugin(): Plugin {
 export default defineConfig({
   plugins: [
     vue(),
-    tsconfigPaths({ loose: true }),
     VueRouter({}),
     electron([
       {
@@ -98,4 +96,7 @@ export default defineConfig({
       })()
     : undefined,
   clearScreen: false,
+  resolve: {
+    alias: [{ find: '@', replacement: '/src' }],
+  },
 })
