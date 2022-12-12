@@ -5,8 +5,8 @@
   appId: 'com.podback.app',
   extraResources: [
     {
-      from: 'python',
-      to: 'python',
+      from: 'bin',
+      to: 'bin',
       filter: ['**/*'],
     },
   ],

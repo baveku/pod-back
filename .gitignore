@@ -30,3 +30,6 @@ dist-electron
 
 python/*
 !python/main.py
+
+bin/*
+!bin/README.md
