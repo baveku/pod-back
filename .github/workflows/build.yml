@@ -38,9 +38,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install Python Dependencies
-        run: pip install pywin32 pyinstaller && pyinstaller --onefile main.py
-        working-directory: python
+      # - name: Install Python Dependencies
+      #   run: pip install pywin32 pyinstaller && pyinstaller --onefile main.py
+      #   working-directory: python
 
       - name: Build Release Files
         run: npm run build
