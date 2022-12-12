@@ -49,7 +49,6 @@ watch(xmlFile, async (newValue, oldValue) => {
 
 const treeData = ref('')
 function _onExcute() {
-	const orders: OrderInfo[] = sheetValues.value
 	_onRunPython()
 }
 
