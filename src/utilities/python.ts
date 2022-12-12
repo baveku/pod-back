@@ -1,9 +1,7 @@
+import path from 'path'
 import { PythonShell } from 'python-shell'
 const DIR_SCRIPT_PATH = 'python'
 type PythonScript = 'change_text'
-
-// @ts-ignore
-const RESOURCE_PATH = process.resourcePath
 
 const getPythonFile = (script: PythonScript) => {
   switch (script) {
@@ -13,10 +11,13 @@ const getPythonFile = (script: PythonScript) => {
 }
 
 const changeTextPyScript = (type: PythonScript, args: any[] = []) => {
-  let filePath = DIR_SCRIPT_PATH + '/' + getPythonFile(type)
+  let filePath = path.join(DIR_SCRIPT_PATH, getPythonFile(type))
+  console.log(process)
   // @ts-ignore
-  if (!process.sandboxed) {
-    filePath = RESOURCE_PATH + '/' + filePath
+  if (!process.sanboxed) {
+    // @ts-ignore
+    const RESOURCE_PATH = process.resourcesPath
+    filePath = path.join(RESOURCE_PATH, DIR_SCRIPT_PATH, getPythonFile(type))
   }
   PythonShell.run(filePath, { args }, (err, result) => {
     if (err) console.log(err)

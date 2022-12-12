@@ -47,9 +47,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Current Dir
-        run: ls
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
