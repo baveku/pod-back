@@ -83,8 +83,9 @@ const _onRunPython = () => {
 <template>
 	<div class="container">
 		<div class="template">
-			<v-file-input label="Template folder" webkitdirectory v-model="templateFiles" accept=".xlsx"></v-file-input>
-			<v-table fixed-header>
+			<v-file-input label="Template folder" hide-details small-chips webkitdirectory v-model="templateFiles"
+				accept=".psd" hide-input show-size chips multiple></v-file-input>
+			<v-table fixed-header style="flex: 1; max-height: fit-content;">
 				<tbody>
 					<tr v-for="item in templateFiles">
 						<td>{{ item.name }}</td>
@@ -93,9 +94,10 @@ const _onRunPython = () => {
 			</v-table>
 		</div>
 		<div class="order">
-			<v-file-input label="Order files" v-model="selectedXmlFile"></v-file-input>
+			<v-file-input label="Order files" v-model="selectedXmlFile"
+				accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></v-file-input>
 			<p>{{ xlsxMessage }}</p>
-			<v-table fixed-header>
+			<v-table fixed-header style="flex: 1; max-height: fit-content;">
 				<thead>
 					<tr>
 						<th class="text-center">
@@ -119,13 +121,14 @@ const _onRunPython = () => {
 			</v-table>
 		</div>
 	</div>
-	<div id="#psd-output"></div>
-	<v-btn v-on:click="_onExcute">
-		Excute
-	</v-btn>
-	<v-btn @click="_onRunPython">
-		Run Python
-	</v-btn>
+	<div>
+		<v-btn v-on:click="_onExcute">
+			Chạy
+		</v-btn>
+		<!-- <v-btn @click="_onRunPython">
+			Testing
+		</v-btn> -->
+	</div>
 </template>
 
 <style>

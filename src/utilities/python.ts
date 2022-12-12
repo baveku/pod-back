@@ -1,11 +1,11 @@
 import { PythonShell } from 'python-shell'
-const DIR_SCRIPT_PATH = 'scripts'
+const DIR_SCRIPT_PATH = 'python'
 type PythonScript = 'change_text'
 
 const getPythonFile = (script: PythonScript) => {
   switch (script) {
     case 'change_text':
-      return 'pts.py'
+      return 'main.py'
   }
 }
 
