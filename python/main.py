@@ -1,6 +1,7 @@
-import sys
 import os
+import sys
 from pathlib import Path
+
 import win32com.client
 
 args = sys.argv[1:]
@@ -28,5 +29,6 @@ for idx, val in enumerate(ORDER_IDS):
 	fileName=(Path.joinpath(OUTPUT_DIR, file_export_name +".png"))
 	layers.Export(ExportIn=fileName, ExportAs=2, Options=options)
 
-psApp.Close()
+while psApp.Documents.Count > 0:
+    psApp.ActiveDocument.Close(2)
 sys.stdout.flush()
