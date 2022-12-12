@@ -50,7 +50,7 @@ watch(xmlFile, async (newValue, oldValue) => {
 const treeData = ref('')
 function _onExcute() {
 	const orders: OrderInfo[] = sheetValues.value
-	exportPng(orders[0])
+	_onRunPython()
 }
 
 const exportPng = async (order: OrderInfo) => {

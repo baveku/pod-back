@@ -3,7 +3,7 @@ const DIR_SCRIPT_PATH = 'python'
 type PythonScript = 'change_text'
 
 // @ts-ignore
-const RESOURCE_PATH = process.resourcesPath
+const RESOURCE_PATH = process.resourcePath
 
 const getPythonFile = (script: PythonScript) => {
   switch (script) {
@@ -14,7 +14,8 @@ const getPythonFile = (script: PythonScript) => {
 
 const changeTextPyScript = (type: PythonScript, args: any[] = []) => {
   let filePath = DIR_SCRIPT_PATH + '/' + getPythonFile(type)
-  if (RESOURCE_PATH) {
+  // @ts-ignore
+  if (process.sandboxed) {
     filePath = RESOURCE_PATH + '/' + filePath
   }
   PythonShell.run(filePath, { args }, (err, result) => {
