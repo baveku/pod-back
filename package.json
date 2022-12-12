@@ -1,6 +1,6 @@
 {
   "name": "pod-back",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "dist-electron/main/index.js",
   "description": "Cadava108 GOD TOOLS",
   "author": "baveku@gmail.com",
