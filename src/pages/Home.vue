@@ -5,7 +5,6 @@ import fs from 'fs'
 import { computed, ref, watch } from 'vue'
 const templateFiles = ref<any[]>([])
 const selectedXmlFile = ref<any[]>([])
-
 watch(templateFiles, (newVal, oldVal) => {
 	console.log(newVal)
 })
@@ -47,16 +46,8 @@ watch(xmlFile, async (newValue, oldValue) => {
 
 })
 
-const treeData = ref('')
 function _onExcute() {
 	_onRunPython()
-}
-
-const exportPng = async (order: OrderInfo) => {
-	const files = templateFiles.value
-	console.log(files)
-	console.log(order.sku)
-	const file = files[0]
 }
 
 const _onRunPython = () => {
@@ -72,7 +63,7 @@ const _onRunPython = () => {
 	Object.keys(files).forEach(id => {
 		const file = templateFiles.value.find(val => val.name === `${id}.psd`)
 		if (file) {
-			PyScript.changeTextPyScript('change_text', [file.path, files[id].ids, files[id].texts])
+			PyScript.changeText('change_text', [file.path, files[id].ids, files[id].texts])
 		}
 	})
 }
@@ -121,7 +112,7 @@ const _onRunPython = () => {
 		</div>
 	</div>
 	<div>
-		<v-btn v-on:click="_onExcute">
+		<v-btn @click="_onExcute">
 			Chạy
 		</v-btn>
 		<!-- <v-btn @click="_onRunPython">

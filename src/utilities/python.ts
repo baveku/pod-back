@@ -3,17 +3,11 @@ import path from 'path'
 const DIR_SCRIPT_PATH = ''
 
 // @ts-ignore
-const RESOURCES_PATH = process.sanboxed ? process.resourcesPath : ''
+const RESOURCES_PATH = // @ts-ignore
+  process.env.NODE_ENV !== 'DEV' ? process.resourcesPath : ''
 type PythonScript = 'change_text'
 
-const getPythonFile = (script: PythonScript) => {
-  switch (script) {
-    case 'change_text':
-      return 'main.py'
-  }
-}
-
-const changeTextPyScript = (type: PythonScript, args: any[] = []) => {
+const changeText = (type: PythonScript, args: any[] = []) => {
   console.log(process)
 
   const isWindows = /^win/i.test(process.platform)
@@ -28,6 +22,6 @@ const changeTextPyScript = (type: PythonScript, args: any[] = []) => {
   })
 }
 const PyScript = {
-  changeTextPyScript,
+  changeText,
 }
 export default PyScript

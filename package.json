@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "NODE_ENV=DEV vite",
     "build": "vue-tsc --noEmit && vite build && electron-builder",
     "compile-python": "cd python && pyinstaller --onefile main.py --distpath ../bin"
   },
