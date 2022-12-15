@@ -22,7 +22,9 @@ const getProgramPath = () => {
 // PROGRAM
 const changeText = (type: PythonScript, args: any[] = []) => {
   return new Promise((resolve, reject) => {
-    const filePath = path.join(RESOURCES_PATH, 'bin', getProgramPath())
+    const filePath = path
+      .join(RESOURCES_PATH, 'bin', getProgramPath())
+      .replace('Program Files', `"Program Files"`)
     const argsStr = args.join(' ')
     const cmd = `"${filePath}" ${argsStr}`
     const spawn = child_process.spawn(`${filePath}`, args, { shell: true })
