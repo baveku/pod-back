@@ -24,7 +24,7 @@ const changeText = (type: PythonScript, args: any[] = []) => {
   return new Promise((resolve, reject) => {
     const filePath = path.join(RESOURCES_PATH, 'bin', getProgramPath())
     const argsStr = args.join(' ')
-    const cmd = `${filePath} ${argsStr}`
+    const cmd = `"${filePath}" ${argsStr}`
     child_process.execFile(cmd, (err, stdout, stderr) => {
       if (err) {
         console.log(err)

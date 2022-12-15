@@ -10,7 +10,7 @@ ORDER_IDS = args[1].split(',')
 TEXT_INPUTS = args[2].split(',')
 
 OUTPUT_DIR = Path.joinpath(Path(PSD_PATH).parent.parent, 'POD-BACK')
-os.makedirs(OUTPUT_DIR, exist_ok=False)
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 psApp = win32com.client.Dispatch("Photoshop.Application")
 psApp.Open(PSD_PATH)
