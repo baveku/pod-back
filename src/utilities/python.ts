@@ -25,11 +25,17 @@ const changeText = (type: PythonScript, args: any[] = []) => {
     const filePath = path.join(RESOURCES_PATH, 'bin', getProgramPath())
     const argsStr = args.join(' ')
     const cmd = `"${filePath}" ${argsStr}`
-    child_process.execFile(cmd, (err, stdout, stderr) => {
-      if (err) {
-        console.log(err)
-      }
-      console.log(stdout, stderr)
+    const spawn = child_process.spawn(`${filePath}`, args, { shell: true })
+    spawn.stdout.on('data', (data) => {
+      console.log(data.toString())
+    })
+
+    spawn.stderr.on('data', (data) => {
+      console.error(data.toString())
+    })
+
+    spawn.on('close', (code) => {
+      console.log(`Child exited with code ${code}`)
       resolve(cmd)
     })
   })
