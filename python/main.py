@@ -26,7 +26,7 @@ for idx, val in enumerate(ORDER_IDS):
 	options.Format = 8
 	options.Quality = 100
 	
-	fileName=(Path.joinpath(OUTPUT_DIR, file_export_name +".png"))
+	fileName=(Path.joinpath(OUTPUT_DIR, file_export_name + "-" + replace_text + ".png"))
 	layers.Export(ExportIn=fileName, ExportAs=2, Options=options)
 
 while psApp.Documents.Count > 0:

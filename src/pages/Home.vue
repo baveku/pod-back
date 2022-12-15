@@ -54,16 +54,20 @@ const _onRunPython = () => {
 	const orders = sheetValues.value
 	let files: { [key: string]: { ids: string[], texts: string[] } } = {}
 	orders.forEach(val => {
-		const current = files[val.sku] ?? { ids: [], texts: [] }
-		files[val.sku] = {
-			ids: [...current.ids, val.id],
-			texts: [...current.texts, val.customName]
+		if (val.sku.length > 0) {
+			const current = files[val.sku] ?? { ids: [], texts: [] }
+			files[val.sku] = {
+				ids: [...current.ids, val.id],
+				texts: [...current.texts, val.customName]
+			}
 		}
 	})
-	Object.keys(files).forEach(id => {
+	Object.keys(files).forEach(async (id) => {
 		const file = templateFiles.value.find(val => val.name === `${id}.psd`)
 		if (file) {
-			PyScript.changeText('change_text', [file.path, files[id].ids, files[id].texts])
+			const texts = `"${files[id].texts.join(",")}"`
+			const orders = `"${files[id].ids.join(",")}"`
+			await PyScript.changeText('change_text', [file.path, orders, texts])
 		}
 	})
 }
