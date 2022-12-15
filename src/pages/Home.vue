@@ -67,7 +67,7 @@ const _onRunPython = () => {
 		if (file) {
 			const texts = `"${files[id].texts.join(",")}"`
 			const orders = `"${files[id].ids.join(",")}"`
-			await PyScript.changeText('change_text', [file.path, orders, texts])
+			await PyScript.changeText('change_text', [`"${file.path}"`, orders, texts])
 		}
 	})
 }
