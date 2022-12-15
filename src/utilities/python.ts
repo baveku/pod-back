@@ -8,8 +8,6 @@ const RESOURCES_PATH = // @ts-ignore
 type PythonScript = 'change_text'
 
 const changeText = (type: PythonScript, args: any[] = []) => {
-  console.log(process)
-
   const isWindows = /^win/i.test(process.platform)
   const fileName = !isWindows ? 'main' : 'main.exe'
   const filePath = path.join(RESOURCES_PATH, DIR_SCRIPT_PATH, 'bin', fileName)
