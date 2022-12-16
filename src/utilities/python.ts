@@ -21,26 +21,12 @@ const getProgramPath = () => {
 
 // PROGRAM
 const changeText = (type: PythonScript, args: any[] = []) => {
-  return new Promise((resolve, reject) => {
-    const filePath = path
-      .join(RESOURCES_PATH, 'bin', getProgramPath())
-      .replace('Program Files', `"Program Files"`)
-    const argsStr = args.join(' ')
-    const cmd = `"${filePath}" ${argsStr}`
-    const spawn = child_process.spawn(`${filePath}`, args, { shell: true })
-    spawn.stdout.on('data', (data) => {
-      console.log(data.toString())
-    })
-
-    spawn.stderr.on('data', (data) => {
-      console.error(data.toString())
-    })
-
-    spawn.on('close', (code) => {
-      console.log(`Child exited with code ${code}`)
-      resolve(cmd)
-    })
-  })
+  const filePath = path
+    .join(RESOURCES_PATH, 'bin', getProgramPath())
+    .replace('Program Files', `"Program Files"`)
+  const argsStr = args.join(' ')
+  const cmd = `"${filePath}" ${argsStr}`
+  child_process.spawnSync(`${filePath}`, args, { shell: true })
 }
 const PyScript = {
   changeText,
