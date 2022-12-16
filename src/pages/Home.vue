@@ -54,7 +54,9 @@ const _onRunPython = () => {
 	const orders = sheetValues.value
 	let files: { [key: string]: { ids: string[], texts: string[] } } = {}
 	orders.forEach(val => {
-		if (val.sku.length > 0) {
+		const skuLength = val.sku ?? ''
+		console.log(skuLength)
+		if (skuLength.length > 0) {
 			const current = files[val.sku] ?? { ids: [], texts: [] }
 			files[val.sku] = {
 				ids: [...current.ids, val.id],
