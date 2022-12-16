@@ -13,7 +13,7 @@ OUTPUT_DIR = Path.joinpath(Path(PSD_PATH).parent.parent, 'POD-BACK')
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 psApp = win32com.client.Dispatch("Photoshop.Application")
-psApp.Open(PSD_PATH)
+doc = psApp.Open(PSD_PATH)
 layers = psApp.Application.ActiveDocument
 
 for idx, val in enumerate(ORDER_IDS):
@@ -28,7 +28,5 @@ for idx, val in enumerate(ORDER_IDS):
 	
 	fileName=(Path.joinpath(OUTPUT_DIR, file_export_name + "-" + replace_text + ".png"))
 	layers.Export(ExportIn=fileName, ExportAs=2, Options=options)
-
-while psApp.Documents.Count > 0:
-    psApp.ActiveDocument.Close(2)
+doc.Close(2)
 sys.stdout.flush()
