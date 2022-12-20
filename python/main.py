@@ -28,10 +28,14 @@ for idx, val in enumerate(ORDER_IDS):
 	options = win32com.client.Dispatch('Photoshop.ExportOptionsSaveForWeb')
 	options.Format = 8
 	options.Quality = 100
-	
-	orderOutputDIR = Path.joinpath(OUTPUT_DIR, file_export_name)
-	os.makedirs(orderOutputDIR, exist_ok=True)
-	fileName=(Path.joinpath(orderOutputDIR, file_export_name + "-" + replace_text + ".png"))
-	layers.Export(ExportIn=fileName, ExportAs=2, Options=options)
+	canCreateFolder = ORDER_IDS.count(file_export_name) > 1
+	fileName = file_export_name + "-" + replace_text + ".png"
+	ourDir = OUTPUT_DIR
+	if canCreateFolder:
+		orderOutputDIR = Path.joinpath(OUTPUT_DIR, file_export_name)
+		os.makedirs(orderOutputDIR, exist_ok=True)
+		ourDir = orderOutputDIR
+	fileExport = Path.joinpath(ourDir, fileName)
+	layers.Export(ExportIn=fileExport, ExportAs=2, Options=options)
 doc.Close(2)
 sys.stdout.flush()
