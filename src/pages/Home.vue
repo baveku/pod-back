@@ -55,7 +55,6 @@ const _onRunPython = () => {
 	let files: { [key: string]: { ids: string[], texts: string[] } } = {}
 	orders.forEach(val => {
 		const skuLength = val.sku ?? ''
-		console.log(skuLength)
 		if (skuLength.length > 0) {
 			const current = files[val.sku] ?? { ids: [], texts: [] }
 			files[val.sku] = {
@@ -67,7 +66,8 @@ const _onRunPython = () => {
 	Object.keys(files).forEach(async (id) => {
 		const file = templateFiles.value.find(val => val.name === `${id}.psd`)
 		if (file) {
-			const fileName = file.name
+			const fileName = id
+			console.log(fileName)
 			const texts = `"${files[id].texts.join(",")}"`
 			const orders = `"${files[id].ids.join(",")}"`
 			PyScript.changeText('change_text', [`"${file.path}"`, orders, texts, fileName])
