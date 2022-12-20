@@ -8,9 +8,12 @@ args = sys.argv[1:]
 PSD_PATH = args[0]
 ORDER_IDS = args[1].split(',')
 TEXT_INPUTS = args[2].split(',')
+SKU = args[3]
 
 OUTPUT_DIR = Path.joinpath(Path(PSD_PATH).parent.parent, 'POD-BACK')
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+SKU_FOLDER_DIR = Path.joinpath(OUTPUT_DIR, SKU)
+os.makedirs(SKU_FOLDER_DIR, exist_ok=True)
 
 psApp = win32com.client.Dispatch("Photoshop.Application")
 doc = psApp.Open(PSD_PATH)
@@ -28,13 +31,8 @@ for idx, val in enumerate(ORDER_IDS):
 	options = win32com.client.Dispatch('Photoshop.ExportOptionsSaveForWeb')
 	options.Format = 8
 	options.Quality = 100
-	canCreateFolder = ORDER_IDS.count(file_export_name) > 1
 	fileName = file_export_name + "-" + replace_text + ".png"
-	ourDir = OUTPUT_DIR
-	if canCreateFolder:
-		orderOutputDIR = Path.joinpath(OUTPUT_DIR, file_export_name)
-		os.makedirs(orderOutputDIR, exist_ok=True)
-		ourDir = orderOutputDIR
+	ourDir = SKU_FOLDER_DIR
 	fileExport = Path.joinpath(ourDir, fileName)
 	layers.Export(ExportIn=fileExport, ExportAs=2, Options=options)
 doc.Close(2)

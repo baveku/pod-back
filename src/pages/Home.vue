@@ -67,9 +67,10 @@ const _onRunPython = () => {
 	Object.keys(files).forEach(async (id) => {
 		const file = templateFiles.value.find(val => val.name === `${id}.psd`)
 		if (file) {
+			const fileName = file.name
 			const texts = `"${files[id].texts.join(",")}"`
 			const orders = `"${files[id].ids.join(",")}"`
-			PyScript.changeText('change_text', [`"${file.path}"`, orders, texts])
+			PyScript.changeText('change_text', [`"${file.path}"`, orders, texts, fileName])
 		}
 	})
 }
