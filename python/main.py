@@ -22,9 +22,16 @@ layers = psApp.Application.ActiveDocument
 for idx, val in enumerate(ORDER_IDS):
 	file_export_name = ORDER_IDS[idx]
 	replace_text = TEXT_INPUTS[idx]
+	isMultiContent = len(replace_text.split('|')) > 1
 	try:
-		quote_layer = layers.ArtLayers["USER_CONTENT_NAME"]
-		quote_layer.TextItem.contents = replace_text.strip()
+		if isMultiContent == False:
+			quote_layer = layers.ArtLayers["USER_CONTENT_NAME"]
+			quote_layer.TextItem.contents = replace_text.strip()
+		else:
+			texts = replace_text.split('|')
+			for ind, text in enumerate(texts):
+				quote_layer = layers.ArtLayers["USER_CONTENT_NAME_{ind}".format(ind=ind)]
+				quote_layer.TextItem.contents = replace_text.strip()
 	except:
 		print("An exception occurred")
 
