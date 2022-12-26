@@ -35,12 +35,10 @@ for idx, val in enumerate(ORDER_IDS):
 	except:
 		print("An exception occurred")
 
-	options = win32com.client.Dispatch('Photoshop.ExportOptionsSaveForWeb')
-	options.Format = 8
-	options.Quality = 100
+	options = win32com.client.Dispatch('Photoshop.PNGSaveOptions')
 	fileName = file_export_name + "-" + replace_text + ".png"
 	ourDir = SKU_FOLDER_DIR
 	fileExport = Path.joinpath(ourDir, fileName)
-	layers.Export(ExportIn=fileExport, ExportAs=2, Options=options)
+	doc.saveAs(fileExport, options)
 doc.Close(2)
 sys.stdout.flush()
