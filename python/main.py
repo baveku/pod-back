@@ -39,6 +39,6 @@ for idx, val in enumerate(ORDER_IDS):
 	fileName = file_export_name + "-" + replace_text + ".png"
 	ourDir = SKU_FOLDER_DIR
 	fileExport = Path.joinpath(ourDir, fileName)
-	doc.saveAsCopy(fileExport, options)
+	doc.SaveAs(fileExport, options, True)
 doc.Close(2)
 sys.stdout.flush()
