@@ -11,6 +11,7 @@ TEXT_INPUTS = args[2].split(',')
 SKU = args[3]
 
 psApp = win32com.client.Dispatch("Photoshop.Application")
+psApp.DisplayAlerts = False
 try:
 	OUTPUT_DIR = Path.joinpath(Path(PSD_PATH).parent.parent, 'POD-BACK')
 	os.makedirs(OUTPUT_DIR, exist_ok=True)
